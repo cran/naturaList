@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Evaluating the filtering process with naturaList</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Evaluating the filtering process with naturaList</h1>
+
+
+
+<p>In this article we will show how <code>{naturaList}</code> package can be used to process large dataset of species occurrence records. Specifically we will show how we can filter occurrence data accordingly to a list of specialists and <a href="#comp_eval">compare the effect</a> of the filtering process regarding the differences in area of distribution of species, richness and the niche space before and after the filtering process.</p>
+<p>Before read this article, it is important to see the <a href="https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html">Introduction to naturaList</a>.</p>
+<p>This evaluation of cleaning procedure is done mainly through the use of <code>clean_eval()</code> function. So, in summary, in this article you will learn how to:</p>
+<ul>
+<li><a href="#env_data">Process</a> geographical and environmental data in order to adequate its format to <code>{naturaList}</code> functions, specifically <code>clean_eval()</code> function;</li>
+<li><a href="#comp_eval">Compare</a> the spatial occurrence, richness and environmental niche of species before and after the cleaning process.</li>
+</ul>
+<div id="install" class="section level2">
+<h2>Installation and required packages</h2>
+<p>For this article the user must load or install the following packages:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naturaList)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Warning: package &#39;dplyr&#39; was built under R version 4.0.5</span></span></code></pre></div>
+</div>
+<div id="classification-process" class="section level2">
+<h2>Classification process</h2>
+<p>We will use occurrence data of the fern genus <em>Cyathea</em> in Brazil, that comprises a group of fern species. This dataset is available in the <code>{naturalist}</code>. We used this dataset to exemplify how to use a dataset with several species in <code>{naturaList}</code>.</p>
+<p>The list of specialists we will use was derived from the authors of a paper describing the diversity of ferns and lycophytes in Brazil (see <code>?speciaLists</code>).</p>
+<p>Both datasets of occurrence of <em>Cyathea</em> species in Brazil and the specialists of ferns and lycophytes are available in the <code>{naturaList}</code>. They can be loaded using the following code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;cyathea.br&quot;</span>) <span class="co"># occurrence dataset</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;speciaLists&quot;</span>) <span class="co"># specialists dataset</span></span></code></pre></div>
+<p>Now, we can use the <code>classify_occ()</code> function to perform the classification process for all species at the same time.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>occ.class <span class="ot">&lt;-</span> <span class="fu">classify_occ</span>(<span class="at">occ =</span> cyathea.br, <span class="at">spec =</span> speciaLists)</span></code></pre></div>
+<p>We can see how many occurrences were classified in each one of the six confidence levels</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(occ.class<span class="sc">$</span>naturaList_levels)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     1_det_by_spec   2_not_spec_name           3_image  4_sci_collection </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#               831              2199               561               242 </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       5_field_obs 6_no_criteria_met </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                17                 1</span></span></code></pre></div>
+</div>
+<div id="env_data" class="section level2">
+<h2>Downloading environmental data</h2>
+<p>We will evaluate the effects of cleaning occurrence data based in the classification made with <code>classify_occ()</code> in both geographical and environmental space. To this purpose we need data on environmental variables. So, we will download bioclim variables from worldclim (using the <code>{raster}</code> package) and select two layers (bio1 and bio12) that represents temperature and precipitation. These variables will be used to calculate the environmental space using the function <code>define_env_space()</code> from <code>{naturaList}</code> package.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># download and load the bioclim raster layers</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>bioclim <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">&#39;worldclim&#39;</span>, <span class="at">var=</span><span class="st">&#39;bio&#39;</span>, <span class="at">res=</span><span class="dv">10</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform occurrence data in SpatialPointsDataFrame</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>spdf.occ.cl <span class="ot">&lt;-</span> <span class="fu">SpatialPoints</span>(occ.class[, <span class="fu">c</span>(<span class="st">&quot;decimalLongitude&quot;</span>, <span class="st">&quot;decimalLatitude&quot;</span>)])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># redefine the extent of bioclim layers </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>c.bioclim <span class="ot">&lt;-</span> <span class="fu">crop</span>(bioclim, spdf.occ.cl) </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># select two layers</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>raster.temp.prec <span class="ot">&lt;-</span> c.bioclim[[<span class="fu">c</span>(<span class="st">&quot;bio1&quot;</span>, <span class="st">&quot;bio12&quot;</span>)]]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>df.temp.prec <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(raster.temp.prec)</span></code></pre></div>
+</div>
+<div id="defining-environmental-space" class="section level2">
+<h2>Defining environmental space</h2>
+<p>Now that we have data of temperature and precipitation, we can define the environmental space using the function <code>define_env_space()</code> in the <code>{naturaList}</code> package.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Define the environmental space for analysis</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>env.space <span class="ot">&lt;-</span> <span class="fu">define_env_space</span>(df.temp.prec, <span class="at">buffer.size =</span> <span class="fl">0.05</span>, <span class="at">plot =</span> F)</span></code></pre></div>
+<p>In this function, the environmental variables are standardized by range, which turns the range of each environmental variable from 0 to 1. Then, it is delimited a <code>buffer.size</code> around each point in this space and a polygon is draw to link these buffers. You can play with the value in the <code>buffer.size</code> argument and set the <code>plot = TRUE</code> to visualize the output polygon. The objective with this function is to create a boundary in the environmental space available for the species.</p>
+</div>
+<div id="defining-geographical-space" class="section level2">
+<h2>Defining geographical space</h2>
+<p>We also need to define the geographical space for comparison before and after the cleaning process.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># delimit the geographic space</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># land area</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;BR&#39;</span>)</span></code></pre></div>
+</div>
+<div id="comp_eval" class="section level2">
+<h2>Comparing before and after cleaning process</h2>
+<p>Here we will use the function <code>clean_eval()</code> to evaluate the effect of filtering process in two characteristics of occurrence of species: the species distribution, calculated as being the convex hull polygon occupied by a species; and the environmental niche breadth, calculated as being the convex hull polygon obtained from two environmental variables.</p>
+<p>Both spatial distribution and niche space are compared between the data before and after the cleaning process. The ratio of area after cleaning and before cleaning in both spatial distribution and niche space are given for each species as one of the results of <code>clean_eval()</code> function.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter by year to be consistent with the environmental data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>occ.class<span class="fl">.1970</span> <span class="ot">&lt;-</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  occ.class <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1970</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning evaluation process</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>cl.eval_all <span class="ot">&lt;-</span> <span class="fu">clean_eval</span>(<span class="at">occ.cl =</span> occ.class<span class="fl">.1970</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">env.space =</span> env.space,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">geo.space =</span> BR,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">r =</span> raster.temp.prec) </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Warning: package &#39;sf&#39; was built under R version 4.0.5</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># the amount of area remained after cleaning process </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>area_remained <span class="ot">&lt;-</span> cl.eval_all<span class="sc">$</span>area </span></code></pre></div>
+<p>The area is a value that range from 0 to 1, in which 0 indicate that none of the area of distribution of the species left after the cleaning process. On the other hand, values of 1 indicate that all the area occupied by a species remains the same after the cleaning process. In this example we cleaned our data to maintain only the occurrence points of species that was identified by a specialist. But it can be altered in the <code>level.filter</code> argument (see <code>?clean_eval</code>).</p>
+<p>If you are working with more than one species, one example of the usage of <code>clean_eval()</code> results is to plot in a map the richness containing in each grid before and after the cleaning process. This can be done with the following code:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rich.before.clean <span class="ot">&lt;-</span> <span class="fu">rasterFromXYZ</span>(<span class="fu">cbind</span>(cl.eval_all<span class="sc">$</span>site.coords,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                                         cl.eval_all<span class="sc">$</span>rich<span class="sc">$</span>rich.BC))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>rich.after.clean <span class="ot">&lt;-</span> <span class="fu">rasterFromXYZ</span>(<span class="fu">cbind</span>(cl.eval_all<span class="sc">$</span>site.coords,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                         cl.eval_all<span class="sc">$</span>rich<span class="sc">$</span>rich.AC))</span></code></pre></div>
+<p>This can be plotted in two maps and compare the effects of filtering process in the richness of community</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rich.before.clean, <span class="at">main =</span> <span class="st">&quot;Richness before cleaning&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rich.after.clean, <span class="at">main =</span> <span class="st">&quot;Richness after cleaning&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
