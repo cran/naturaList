@@ -1,4 +1,7 @@
-# naturaList 0.4.0
+# naturaList 0.4.2
+* documentation update
+
+# naturaList 0.4.1
 * bug solved in the classify_occ function
 
 # naturaList 0.4.0

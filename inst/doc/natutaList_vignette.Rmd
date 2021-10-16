@@ -17,11 +17,10 @@ knitr::opts_chunk$set(
 The aim of `{naturaList}` package is to implement a classification of occurrence records based on the suitability in the species identification record. The quality of classification is ranked up to six levels of confidence. Additionally, `{naturaList}` package provides tools to filter the occurrence data based on these classification levels, identify the possible specialists in the taxa and evaluate the effects of the filtering procedure on different descriptors of species spatial distribution of occurrence records (area of distribution and niche breadth). With `{naturaList}` package the users can filter large occurrence data based on well established and clear criterion, evaluate possible effect of data processing on downstream analysis and explore spatial occurrence data through an interactive interface.
 
 ## Installation
-Install the package from github:
+Install the package:
 
 ```{r install, eval=F, echo = T}
-library(devtools)
-install_github("avrodrigues/naturaList")
+install.packages("naturaList")
 ```
 
 ## Classify occurrence records based on confidence in the species identification

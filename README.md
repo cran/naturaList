@@ -26,8 +26,12 @@ The package allows to classify the occurrence records in confidence levels throu
 The user can alter this order, depending on his/her objectives, except for the Level 1 that is always a species determined by a specialist.
 
 ## Installation
+You can install the package from CRAN:
+``` {.r}
+install.packages("naturaList")
+```
 
-You can install the last released version of naturaList from github using:
+Or install the latest released develoment version from github using:
 
 ``` {.r}
 install.packages("devtools")

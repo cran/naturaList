@@ -1,7 +1,7 @@
 Package: naturaList
 Type: Package
 Title: Classify Occurrences by Confidence Levels in the Species ID
-Version: 0.4.1
+Version: 0.4.2
 Authors@R: c(
     person("Arthur  Vinicius", "Rodrigues", email = "rodrigues.arthur.v@gmail.com", role = "cre"),
     person("Gabriel", "Nakamura", role = "aut"),
@@ -24,10 +24,10 @@ Depends: R (>= 2.10)
 URL: https://github.com/avrodrigues/naturaList
 BugReports: https://github.com/avrodrigues/naturaList/issues
 NeedsCompilation: no
-Packaged: 2021-08-20 12:15:47 UTC; avrodrigues
+Packaged: 2021-10-16 15:29:03 UTC; avrodrigues
 Author: Arthur Vinicius Rodrigues [cre],
   Gabriel Nakamura [aut],
   Leandro Duarte [aut]
 Maintainer: Arthur  Vinicius Rodrigues <rodrigues.arthur.v@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-08-21 09:30:02 UTC
+Date/Publication: 2021-10-16 23:20:02 UTC

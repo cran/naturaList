@@ -5,8 +5,7 @@ knitr::opts_chunk$set(
 )
 
 ## ----install, eval=F, echo = T------------------------------------------------
-#  library(devtools)
-#  install_github("avrodrigues/naturaList")
+#  install.packages("naturaList")
 
 ## ----setup, eval=FALSE--------------------------------------------------------
 #  # Load package and data

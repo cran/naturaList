@@ -31,19 +31,13 @@ table(occ.class$naturaList_levels)
 
 ## ----clim_data----------------------------------------------------------------
 
-# download and load the bioclim raster layers
-bioclim <- getData('worldclim', var='bio', res=10)
+# load climate data
+data("r.temp.prec")
+df.temp.prec <- raster::as.data.frame(r.temp.prec)
+    
 
 # Transform occurrence data in SpatialPointsDataFrame
 spdf.occ.cl <- SpatialPoints(occ.class[, c("decimalLongitude", "decimalLatitude")])
-
-# redefine the extent of bioclim layers 
-c.bioclim <- crop(bioclim, spdf.occ.cl) 
-
-
-# select two layers
-raster.temp.prec <- c.bioclim[[c("bio1", "bio12")]]
-df.temp.prec <- as.data.frame(raster.temp.prec)
 
 
 ## ----env_space----------------------------------------------------------------
@@ -69,7 +63,7 @@ occ.class.1970 <-
 cl.eval_all <- clean_eval(occ.cl = occ.class.1970,
                               env.space = env.space,
                               geo.space = BR,
-                              r = raster.temp.prec) 
+                              r = r.temp.prec) 
 
 # the amount of area remained after cleaning process 
 area_remained <- cl.eval_all$area 

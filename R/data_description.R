@@ -55,3 +55,18 @@
 #' A spatial polygon with the Brazil boundaries
 #' @format A 'SpatialPolygonsDataFrame' with 1 feature
 "BR"
+
+#' Raster of temperature and precipitation
+#'
+#' Raster of Annual Mean Temperature (bio1) and Total Annual Precipitation (bio2).
+#' Layers were downloaded from worldclim database and cropped to the extent of
+#' \code{cyathea_br} with a buffer of 100 km.
+#'
+#' @format A raster with two layers
+"r.temp.prec"
+
+#' Example of specialist names with accent marks
+#'
+#'
+#' @format character
+"spec_names_ex"

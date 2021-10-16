@@ -13,15 +13,10 @@
 #' @encoding UTF-8
 #' @examples
 #' # Example using Latin accent marks
+#' data(spec_names_ex)
 #'
-#' spec_list <- iconv(
-#'   c("Caetano Veloso", "Antônio Carlos Tom Jobim",
-#'     "Gilberto Gil", "Vinícius de Morais"),
-#'   from = "UTF-8", to='latin1')
-#'
-#' spec_list
-#'
-#' create_spec_df(spec_list)
+#' spec_names_ex
+#' create_spec_df(spec_names_ex)
 #'
 #' @export
 

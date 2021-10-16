@@ -80,88 +80,72 @@ environmental space
 \examples{
 \donttest{
 
-  library(raster)
-  library(sp)
+library(raster)
+library(sp)
 
-  data("speciaLists")
-  data("cyathea.br")
+data("speciaLists")
+data("cyathea.br")
 
-  # classify
-  occ.cl <- classify_occ(cyathea.br, speciaLists)
-  nrow(occ.cl)
+# classify
+occ.cl <- classify_occ(cyathea.br, speciaLists)
+nrow(occ.cl)
 
-  # delimit the geographic space
-  # land area
-  data("BR")
-  un.land <- BR
-
-  # Transform occurrence data in SpatialPointsDataFrame
-  spdf.occ.cl <- sp::SpatialPoints(occ.cl[, c("decimalLongitude", "decimalLatitude")])
-
-  # Crop by geographic space
-  spdf.occ.cl <- raster::crop(spdf.occ.cl, un.land)
-
-  # download climate data
-  # this function will download the bioclim raster layer
-  # to your work directory
-  bioclim <- raster::getData('worldclim', var='bio', res=10)
-
-  # redefine the extent of bioclim layers based on buffer around the occurrences
-  c.bioclim <- raster::crop(
-    bioclim,
-    raster::buffer(spdf.occ.cl, 100000)
-  ) # 100km buffer
-
-  # select two layers
-  raster.temp.prec <- c.bioclim[[c("bio1", "bio12")]]
-  df.temp.prec <- raster::as.data.frame(raster.temp.prec)
-
-  ### Define the environmental space for analysis
-  # this function will create a boundary of available environmental space,
-  # analogous to the continent boundary in the geographical space
-  env.space <- define_env_space(df.temp.prec, buffer.size = 0.05)
-
-  # geo space based on crop
-  c.geo.space <- raster::crop(un.land, c.bioclim)
-
-  # filter by year to be consistent with the environmental data
-  occ.class.1970 <-  occ.cl \%>\%
-    dplyr::filter(year >= 1970)
-
-  ### run the evaluation
-  cl.eval <- clean_eval(occ.class.1970,
-                        env.space = env.space,
-                        geo.space = c.geo.space,
-                        r = raster.temp.prec)
-
-  #area results
-  cl.eval$area
+# delimit the geographic space
+# land area
+data("BR")
 
 
-  ### richness maps
-  ## it makes sense if there are more than one species
-  rich.before.clean <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
-                                           cl.eval$rich$rich.BC))
-  rich.after.clean <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
-                                          cl.eval$rich$rich.AC))
+# Transform occurrence data in SpatialPointsDataFrame
+spdf.occ.cl <- sp::SpatialPoints(occ.cl[, c("decimalLongitude", "decimalLatitude")])
 
-  raster::plot(rich.before.clean)
-  raster::plot(rich.after.clean)
 
-  ### species area map
-  comp.bc <- as.data.frame(cl.eval$comp$comp.BC)
-  comp.ac <- as.data.frame(cl.eval$comp$comp.AC)
+# load climate data
+data("r.temp.prec")
+df.temp.prec <- raster::as.data.frame(r.temp.prec)
 
-  c.villosa.bc <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
-                                              comp.bc$`Cyathea villosa`))
-  c.villosa.ac <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
-                                              comp.ac$`Cyathea villosa`))
+### Define the environmental space for analysis
+# this function will create a boundary of available environmental space,
+# analogous to the continent boundary in the geographical space
+env.space <- define_env_space(df.temp.prec, buffer.size = 0.05)
 
-  raster::plot(c.villosa.bc)
-  raster::plot(c.villosa.ac)
+# filter by year to be consistent with the environmental data
+occ.class.1970 <-  occ.cl \%>\%
+  dplyr::filter(year >= 1970)
+
+### run the evaluation
+cl.eval <- clean_eval(occ.class.1970,
+                      env.space = env.space,
+                      geo.space = BR,
+                      r = r.temp.prec)
+
+#area results
+cl.eval$area
+
+
+### richness maps
+## it makes sense if there are more than one species
+rich.before.clean <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                                 cl.eval$rich$rich.BC))
+rich.after.clean <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                                cl.eval$rich$rich.AC))
+
+raster::plot(rich.before.clean)
+raster::plot(rich.after.clean)
+
+### species area map
+comp.bc <- as.data.frame(cl.eval$comp$comp.BC)
+comp.ac <- as.data.frame(cl.eval$comp$comp.AC)
+
+c.villosa.bc <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                            comp.bc$`Cyathea villosa`))
+c.villosa.ac <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                            comp.ac$`Cyathea villosa`))
+
+raster::plot(c.villosa.bc)
+raster::plot(c.villosa.ac)
 }
 
 }
 \seealso{
-[define_env_space()]
+\code{\link{define_env_space}}
 }
