@@ -95,7 +95,7 @@
 #' data("A.setosa")
 #' data("speciaLists")
 #' occ.class <- classify_occ(A.setosa, speciaLists)
-#' occ.class
+#'
 #'
 #' @seealso \code{\link{speciaLists}}
 #'

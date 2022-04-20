@@ -50,16 +50,23 @@
 #'
 #' @examples
 #'
-#' data("A.setose")
-#' data(speciaLists)
+#' \dontrun{
+#'
+#' data("A.setosa")
+#' data("speciaLists")
 #'
 #' occ.class <- classify_occ(A.setosa, speciaLists)
 #' occ.grid <- grid_filter(occ.class)
-#' occ.grid
+#'
+#' }
+#'
+#'
+#'
 #'
 #' @author Arthur V. Rodrigues
 #'
-#' @importFrom utils setTxtProgressBar txtProgressBar
+#' @import dplyr
+#' @importFrom rlang .data
 #' @export
 
 grid_filter <- function(occ.cl,
@@ -136,24 +143,33 @@ grid_filter <- function(occ.cl,
     occurrence.id <- occ.id
   }
 
+
+# initial checkings -------------------------------------------------------
+
+
   natList_column <- "naturaList_levels" %in% colnames(occ.cl)
   if(!natList_column){
     stop("occurrences must has 'naturaList_levels' classification.")
   }
 
-  od1 <- occ.cl[order(occ.cl[,year], decreasing = T),]
-  od2 <- od1[order(od1[,date.identified], decreasing = T),]
-  x <- od2[order(od2[,"naturaList_levels"]),]
-  row.names(x) <- 1:nrow(x)
+  spp <- unique(occ.cl[,species])
 
-  spt.spp_DF <- sp::SpatialPointsDataFrame(
-    x[,c(decimal.longitude, decimal.latitude)], x)
+  if(length(spp) > 1){
+    stop("there is more than 1 species in 'occ.cl'. Please, use 'grid_filter' with one species at a time. You can create a loop for filter more species.")
+  }
+
+  if(nrow(occ.cl) == 1){
+    return(occ.cl)
+  }
 
   if(!is.null(r)){
     if(!inherits(r, what =  "RasterLayer")){stop("'r' must be of class RasterLayer")}
   }
 
   if(is.null(r)){
+
+    spt.spp_DF <- sp::SpatialPointsDataFrame(
+      occ.cl[,c(decimal.longitude, decimal.latitude)], occ.cl)
 
     ext <- raster::extent(spt.spp_DF)[1:4]
 
@@ -165,27 +181,18 @@ grid_filter <- function(occ.cl,
     r <- raster::raster(resolution = grid.resolution, ext = raster::extent(new.ext))
   }
 
-  cell.with.pts <- as.numeric(names(table(raster::cellFromXY(r, spt.spp_DF))))
+  occ.xy <- as.matrix(occ.cl[,c(decimal.longitude, decimal.latitude)])
+  occ.cell <- dplyr::mutate(occ.cl, cell = raster::cellFromXY(r, occ.xy))
+  cols.occ <- names(occ.cl)
 
-  total <- length(cell.with.pts)
+  occ.grid <- occ.cell %>%
+    dplyr::arrange(.data$cell, .data$naturaList_levels, desc(.data[[date.identified]]), desc(.data[[year]])) %>%
+    dplyr::group_by(.data$cell) %>%
+    dplyr::slice_head(n = 1) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(cols.occ) %>%
+    as.data.frame()
 
-  final.cols <- c(ncol(spt.spp_DF)+1,ncol(spt.spp_DF)+2)
-
-  df.crit <- vector("list", total)
-
-  pb <- txtProgressBar(min = 0, max = total, style = 3)
-  for (i in 1:total){
-    e <- raster::extentFromCells(r,cell.with.pts[i])
-    crop.df <- raster::crop(spt.spp_DF, raster::extent(e))
-
-    df.crit[[i]] <- as.data.frame(crop.df)[1,-final.cols]
-
-    setTxtProgressBar(pb, i)
-  }
-
-
-  df.occ.crit <- do.call(rbind, df.crit)
-  df.occ.crit <- rm.coord.dup(df.occ.crit, decimal.latitude, decimal.longitude)
-  return(df.occ.crit)
+  return(occ.grid)
 
 }

@@ -159,7 +159,7 @@ indicating the existence of an associated image with \code{stillImage}.
 data("A.setosa")
 data("speciaLists")
 occ.class <- classify_occ(A.setosa, speciaLists)
-occ.class
+
 
 }
 \seealso{

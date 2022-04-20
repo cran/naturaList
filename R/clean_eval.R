@@ -54,17 +54,18 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'
-#' library(raster)
 #' library(sp)
+#' library(raster)
 #'
-#' data("speciaLists")
-#' data("cyathea.br")
+#'
+#' data("speciaLists") # list of specialists
+#' data("cyathea.br") # occurrence dataset
+#'
 #'
 #' # classify
 #' occ.cl <- classify_occ(cyathea.br, speciaLists)
-#' nrow(occ.cl)
 #'
 #' # delimit the geographic space
 #' # land area
@@ -76,7 +77,7 @@
 #'
 #'
 #' # load climate data
-#' data("r.temp.prec")
+#' data("r.temp.prec") # mean temperature and annual precipitation
 #' df.temp.prec <- raster::as.data.frame(r.temp.prec)
 #'
 #' ### Define the environmental space for analysis
@@ -95,7 +96,7 @@
 #'                       r = r.temp.prec)
 #'
 #' #area results
-#' cl.eval$area
+#' head(cl.eval$area)
 #'
 #'
 #' ### richness maps
@@ -121,6 +122,7 @@
 #' raster::plot(c.villosa.ac)
 #' }
 #'
+
 clean_eval <- function(
   occ.cl,
   geo.space,

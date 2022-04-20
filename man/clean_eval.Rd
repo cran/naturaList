@@ -78,17 +78,18 @@ The comparison can be made by measuring area in the geographical and in the
 environmental space
 }
 \examples{
-\donttest{
+\dontrun{
 
-library(raster)
 library(sp)
+library(raster)
 
-data("speciaLists")
-data("cyathea.br")
+
+data("speciaLists") # list of specialists
+data("cyathea.br") # occurrence dataset
+
 
 # classify
 occ.cl <- classify_occ(cyathea.br, speciaLists)
-nrow(occ.cl)
 
 # delimit the geographic space
 # land area
@@ -100,7 +101,7 @@ spdf.occ.cl <- sp::SpatialPoints(occ.cl[, c("decimalLongitude", "decimalLatitude
 
 
 # load climate data
-data("r.temp.prec")
+data("r.temp.prec") # mean temperature and annual precipitation
 df.temp.prec <- raster::as.data.frame(r.temp.prec)
 
 ### Define the environmental space for analysis
@@ -119,7 +120,7 @@ cl.eval <- clean_eval(occ.class.1970,
                       r = r.temp.prec)
 
 #area results
-cl.eval$area
+head(cl.eval$area)
 
 
 ### richness maps

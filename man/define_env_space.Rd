@@ -32,6 +32,7 @@ The environmental variables are standardized by range, which turns
  the environmental space based in the variables used.
 }
 \examples{
+\dontrun{
 library("raster")
 
 # load climate data
@@ -39,6 +40,7 @@ data("r.temp.prec")
 env.data <- raster::as.data.frame(r.temp.prec)
 
 define_env_space(env.data, 0.05)
+}
 
 
 
