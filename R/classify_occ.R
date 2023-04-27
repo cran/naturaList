@@ -102,6 +102,7 @@
 #' @author Arthur V. Rodrigues
 #'
 #' @importFrom rlang .data
+#' @import tm
 #' @export
 
 classify_occ <- function(

@@ -18,6 +18,8 @@
 #' spec_names_ex
 #' create_spec_df(spec_names_ex)
 #'
+#' @importFrom stringi stri_trans_general
+#'
 #' @export
 
 create_spec_df <- function(spec.char){
@@ -139,8 +141,10 @@ create_spec_df <- function(spec.char){
 
   # find for special characters
   mtx.spec.alt <- t(apply(df.spec, 1, function(x){
-    adj.enc <- iconv(x, to='ASCII//TRANSLIT')
+    adj.enc <- stringi::stri_trans_general(x, id = "Latin-ASCII")
   }))
+
+  colnames(mtx.spec.alt) <- names(df.spec)
 
   # Add lines without special characters
   df.spec.j  <- unique(rbind(df.spec, mtx.spec.alt))
