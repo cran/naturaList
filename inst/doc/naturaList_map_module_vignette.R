@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ---- eval=FALSE, echo=TRUE---------------------------------------------------
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  
 #  library(naturaList)
 #  data("A.setosa") # occurrence points for A.setosa
@@ -12,17 +12,17 @@ knitr::opts_chunk$set(
 #  
 #  
 
-## ---- eval=FALSE, echo=TRUE---------------------------------------------------
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  
 #  occ.class <- classify_occ(A.setosa, speciaLists)
 #  
 
-## ---- eval=FALSE, echo=TRUE---------------------------------------------------
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  
 #  occ.select <- map_module(occ.class)
 #  
 
-## ---- eval=FALSE, echo=TRUE---------------------------------------------------
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  
 #  occ.select1 <- map_module(occ.class, action = "flag")
 #  occ.select2 <- map_module(occ.class, action = "clean")

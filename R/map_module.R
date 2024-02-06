@@ -149,7 +149,6 @@ map_module <- function(
   requireNamespace("leaflet")
   requireNamespace("sp")
   requireNamespace("raster")
-  requireNamespace("rgdal")
   requireNamespace("leaflet.extras")
   requireNamespace("shinyLP")
 

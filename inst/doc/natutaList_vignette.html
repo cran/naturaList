@@ -356,7 +356,7 @@ interactive interface.</p>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
 <p>Install the package:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;naturaList&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;naturaList&quot;</span>)</span></code></pre></div>
 </div>
 <div id="classify-occurrence-records-based-on-confidence-in-the-species-identification" class="section level2">
 <h2>Classify occurrence records based on confidence in the species
@@ -392,21 +392,21 @@ were downloaded from <a href="https://doi.org/10.15468/dl.6jesg0">Global
 Biodiversity Information Facility (GBIF)</a>. The
 <code>speciaLists</code> is a dataset with specialists of ferns and
 lycophytes of Brazil, which we gathered from the authors of this <a href="https://doi.org/10.1590/2175-7860201566410">paper</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package and data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naturaList)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;A.setosa&quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;speciaLists&quot;</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># see the size of datasets</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(A.setosa) <span class="co"># see ?A.setosa for details</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(speciaLists) <span class="co"># see ?speciaLists for details</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Load package and data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(naturaList)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;A.setosa&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;speciaLists&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># see the size of datasets</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">dim</span>(A.setosa) <span class="co"># see ?A.setosa for details</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">dim</span>(speciaLists) <span class="co"># see ?speciaLists for details</span></span></code></pre></div>
 <p>Classification using the default order of confidence levels</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># classification</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>occ.class <span class="ot">&lt;-</span> <span class="fu">classify_occ</span>(A.setosa, speciaLists)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(occ.class)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># classification</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>occ.class <span class="ot">&lt;-</span> <span class="fu">classify_occ</span>(A.setosa, speciaLists)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">dim</span>(occ.class)</span></code></pre></div>
 <p>You can check how many occurrences was classified in each level:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(occ.class<span class="sc">$</span>naturaList_levels)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">table</span>(occ.class<span class="sc">$</span>naturaList_levels)</span></code></pre></div>
 </div>
 <div id="create-a-specialist-dataset" class="section level2">
 <h2>Create a specialist dataset</h2>
@@ -417,12 +417,12 @@ formatted be used in <code>classify_occ()</code>.</p>
 <p>In this example, we use the names of four famous Brazilian musicians.
 Note that the Latin accent mark is provided, and even a nickname
 (e.g. Tom Jobim).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a specialist table example</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>br.musicians <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Caetano Veloso&quot;</span>, <span class="st">&quot;Antônio Carlos Tom Jobim&quot;</span>, </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Gilberto Gil&quot;</span>, <span class="st">&quot;Vinícius de Morais&quot;</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>spec_df <span class="ot">&lt;-</span> <span class="fu">create_spec_df</span>(br.musicians)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>spec_df</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># create a specialist table example</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>br.musicians <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Caetano Veloso&quot;</span>, <span class="st">&quot;Antônio Carlos Tom Jobim&quot;</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                  <span class="st">&quot;Gilberto Gil&quot;</span>, <span class="st">&quot;Vinícius de Morais&quot;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>spec_df <span class="ot">&lt;-</span> <span class="fu">create_spec_df</span>(br.musicians)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>spec_df</span></code></pre></div>
 </div>
 <div id="verify-if-the-strings-in-the-identifiedby-column-of-occurrence-dataset-is-a-name" class="section level2">
 <h2>Verify if the strings in the ‘identifiedBy’ column of occurrence
@@ -440,18 +440,18 @@ this list of names, you could create a character vector with the strings
 to be ignored by <code>classify_occ()</code>, providing it to the
 <code>ignore.det.names</code> argument. See also the
 <code>?classify_occ</code> for more details.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check out if there are strings which are not taxonomists</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_det_names</span>(A.setosa)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># include these strings in a object</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ig.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sem Informação&quot;</span> , <span class="st">&quot;Anonymous&quot;</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># use &#39;ignore.det.names&#39; to ignore those strings in classify_occ()</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>occ.class <span class="ot">&lt;-</span> <span class="fu">classify_occ</span>(A.setosa, speciaLists, <span class="at">ignore.det.names =</span> ig.names)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(occ.class<span class="sc">$</span>naturaList_levels)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># check out if there are strings which are not taxonomists</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">get_det_names</span>(A.setosa)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># include these strings in a object</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>ig.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sem Informação&quot;</span> , <span class="st">&quot;Anonymous&quot;</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># use &#39;ignore.det.names&#39; to ignore those strings in classify_occ()</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>occ.class <span class="ot">&lt;-</span> <span class="fu">classify_occ</span>(A.setosa, speciaLists, <span class="at">ignore.det.names =</span> ig.names)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">table</span>(occ.class<span class="sc">$</span>naturaList_levels)</span></code></pre></div>
 </div>
 
 

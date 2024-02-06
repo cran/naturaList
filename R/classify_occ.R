@@ -68,18 +68,18 @@
 #' @details The function classifies the occurrence records in six levels of
 #' confidence in species identification. The six levels are:
 #'  \itemize{
-#'  \item{\code{det_by_spec}}{ - when the identification was made by a specialists
+#'  \item \code{det_by_spec} - when the identification was made by a specialists
 #'     which is present in the list of specialists provided in the \code{spec}
-#'     argument;}
-#'  \item{\code{not_spec_name}}{ - when the identification was made by a name who is
-#'     not a specialist name provide in \code{spec};}
-#'  \item{\code{image}}{ - the occurrence have not name of a identifier, but present
-#'     an image associated; }
-#'  \item{\code{sci_collection}}{ - the occurrence have not name of a identifier,
-#'    but preserved in a scientific collection;}
-#'  \item{ \code{field_obs}}{ - the occurrence have not name of a identifier,
-#'    but it was identified in field observation;}
-#'  \item{\code{no_criteria_met}}{ - no other criteria was met.}
+#'     argument;
+#'  \item \code{not_spec_name} - when the identification was made by a name who is
+#'     not a specialist name provide in \code{spec};
+#'  \item \code{image} - the occurrence have not name of a identifier, but present
+#'     an image associated;
+#'  \item \code{sci_collection} - the occurrence have not name of a identifier,
+#'    but preserved in a scientific collection;
+#'  \item \code{field_obs} - the occurrence have not name of a identifier,
+#'    but it was identified in field observation;
+#'  \item\code{no_criteria_met} - no other criteria was met.
 #' }
 #'  The (decreasing) order of the levels in the character vector determines the
 #'  classification level order.
